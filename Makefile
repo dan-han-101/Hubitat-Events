@@ -4,3 +4,6 @@ build:
 
 publish-pypi-test: dist
 	python3.9 -m twine upload --repository testpypi dist/*
+
+test:
+	python3.9 -m pytest
