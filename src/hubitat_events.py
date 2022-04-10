@@ -1,11 +1,11 @@
 #!/usr/local/bin/python3.9
 
 import requests
-from constants import get_hubitat_base_url, get_hubitat_token
+from constants import get_hubitat_devices_url, get_hubitat_token
 
 
 def get_all_devices():
-    url = f"{get_hubitat_base_url()}?access_token={get_hubitat_token()}"
+    url = f"{get_hubitat_devices_url()}?access_token={get_hubitat_token()}"
     r = requests.get(url)
     if r.status_code == 200:
         print("get_all_devices succeeded")
@@ -18,7 +18,7 @@ def get_all_devices():
 
 def get_events_for_id(device_id: int):
     url = (
-        f"{get_hubitat_base_url()}/{device_id}/events?"
+        f"{get_hubitat_devices_url()}/{device_id}/events?"
         + f"access_token={get_hubitat_token()}"
     )
     r = requests.get(url)
