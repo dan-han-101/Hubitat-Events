@@ -2,6 +2,7 @@
 
 import requests
 from constants import get_hubitat_devices_url, get_hubitat_token
+from event_to_file_adapter import DeviceWriter
 from event_to_file_adapter import EventWriter
 
 
@@ -32,14 +33,17 @@ def get_events_for_id(device_id: int):
 
 
 if __name__ == "__main__":
+    device_writer = DeviceWriter()
     event_writer = EventWriter()
 
     devices = get_all_devices()
     for d in devices:
+        device_writer.save_device(d["id"], d["type"], d["name"], d["label"])
         print(
-            f"Device name={d['name']},"
-            + f" label={d['label']}, "
-            + f"type={d['label']}"
+            f"Device id={d['id']},"
+            + f" type={d['type']},"
+            + f" name={d['name']},"
+            + f" label={d['label']}"
         )
         events = get_events_for_id(d["id"])
         for e in events:
