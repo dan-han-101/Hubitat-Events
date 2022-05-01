@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="hubitat-events-dhan",
-    version="0.0.1",
+    version="0.0.2",
     author="D Han",
     author_email="emaildhan@gmail.com",
     description="Package for fetching hubitat events",
@@ -17,7 +17,10 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    setup_requires=["flake8"]
+    setup_requires=["flake8"],
+    entry_points={
+        "console_scripts": ["hubitat_events=main:main"],
+    }
     # [flake8]
     # max-line-length = 88
     # extend-ignore = E203

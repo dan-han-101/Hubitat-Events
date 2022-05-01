@@ -1,9 +1,9 @@
 #!/usr/local/bin/python3.9
 
 import requests
-from util.constants import get_hubitat_devices_url, get_hubitat_token
-from adapters.event_to_file_adapter import DeviceWriter
-from adapters.event_to_file_adapter import EventWriter
+from hubitat_events.util.constants import get_hubitat_devices_url, get_hubitat_token
+from hubitat_events.adapters.event_to_file_adapter import DeviceWriter
+from hubitat_events.adapters.event_to_file_adapter import EventWriter
 
 
 def get_all_devices():

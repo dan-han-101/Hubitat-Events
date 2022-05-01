@@ -1,6 +1,6 @@
 
 # Build the distribution package. See generated files in `dist/`.
-build:
+dist:
 	python3.9 -m build
 
 publish-pypi-test: dist
@@ -8,3 +8,5 @@ publish-pypi-test: dist
 
 test:
 	python3.9 -m pytest
+
+.PHONY: dist

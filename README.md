@@ -13,12 +13,25 @@ Package for fetching events from your Hubitat.
 
 ## How To
 
-### How To Run
+### How to run and test with virtual environment
 
+Create a virtual environment.
+
+```
+python3.9 -m venv .venv
+. .venv/bin/activate
+```
+
+Build and install from the local source tree.
+```
+pip install -e .
+```
+
+Run
 ```
 HUBITAT_TOKEN=<your-token> \
   HUBITAT_DEVICES_URL=http://hubitat.local/apps/api/<your-device-id>/devices \
-  python3.9 hubitat_events/hubitat.events.py
+  .venv/bin/hubitat_events
 ```
 
 where you'd replace your token and device id with something like:
@@ -26,7 +39,13 @@ where you'd replace your token and device id with something like:
 ```
 HUBITAT_TOKEN=abcde-911-zyx \
   HUBITAT_DEVICES_URL=http://hubitat.local/apps/api/12345/devices \
-  python3.9 hubitat_events/hubitat.events.py
+  .venv/bin/hubitat_events
+```
+
+When you are done, close and clean up virtual environment.
+```
+deactivate
+rm -rf .venv
 ```
 
 ### How to publish to python package index
@@ -37,22 +56,8 @@ make publish-pypi-test
 
 To avoid having to type your username/password or token every time, save your token to a file `$HOME/.pypirc`. Do not add this file to git.
 
-### How to install the published version from pip
-
-Create a virtual environment.
+You can then install the package
 
 ```
-python3.9 -m venv .venv
-. .venv/bin/activate
-```
-
-Then install from test pypi.
-```
-python3.9 -m pip install --index-url https://test.pypi.org/simple/ --no-deps hubitat-events-dhan
-```
-
-When you are done, close and clean up virtual environment.
-```
-deactivate
-rm -rf .venv
+pip install --index-url https://test.pypi.org/simple/ hubitat-events-dhan
 ```
