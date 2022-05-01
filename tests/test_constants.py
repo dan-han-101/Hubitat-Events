@@ -1,5 +1,5 @@
-from src.constants import get_hubitat_devices_url
-from src.constants import get_hubitat_token
+from hubitat_events.util.constants import get_hubitat_devices_url
+from hubitat_events.util.constants import get_hubitat_token
 
 
 def test_hubitat_base_url_default():

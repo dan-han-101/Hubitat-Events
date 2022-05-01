@@ -1,4 +1,5 @@
 
+# Build the distribution package. See generated files in `dist/`.
 build:
 	python3.9 -m build
 

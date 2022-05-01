@@ -1,5 +1,5 @@
 from datetime import datetime
-from src.event_to_file_adapter import EventWriter
+from hubitat_events.adapters.event_to_file_adapter import EventWriter
 
 
 def test_event_to_file_smoke_test():

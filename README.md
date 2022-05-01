@@ -1,5 +1,5 @@
 # Hubitat-Events
-Package for getting events from your Hubitat
+Package for fetching events from your Hubitat.
 
 [Hubitat](https://hubitat.com/) is a home automation hub. This repository helps you retrieve events from the hub.
 
@@ -18,7 +18,7 @@ Package for getting events from your Hubitat
 ```
 HUBITAT_TOKEN=<your-token> \
   HUBITAT_DEVICES_URL=http://hubitat.local/apps/api/<your-device-id>/devices \
-  python3.9 src/hubitat.events.py
+  python3.9 hubitat_events/hubitat.events.py
 ```
 
 where you'd replace your token and device id with something like:
@@ -26,7 +26,7 @@ where you'd replace your token and device id with something like:
 ```
 HUBITAT_TOKEN=abcde-911-zyx \
   HUBITAT_DEVICES_URL=http://hubitat.local/apps/api/12345/devices \
-  python3.9 src/hubitat.events.py
+  python3.9 hubitat_events/hubitat.events.py
 ```
 
 ### How to publish to python package index
@@ -35,7 +35,7 @@ HUBITAT_TOKEN=abcde-911-zyx \
 make publish-pypi-test
 ```
 
-To avoid having to type your username/password or token every time, save your token to a file `.pypirc`. Do not add this file to git.
+To avoid having to type your username/password or token every time, save your token to a file `$HOME/.pypirc`. Do not add this file to git.
 
 ### How to install the published version from pip
 
