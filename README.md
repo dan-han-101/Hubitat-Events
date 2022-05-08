@@ -13,6 +13,30 @@ Package for fetching events from your Hubitat.
 
 ## How To
 
+### How to run and test with Docker (using local source files)
+
+```
+docker build -f local.Dockerfile -t test.local.hubitat-events .
+
+# Run hubitat_events command
+docker run --rm test.local.hubitat-events
+
+# Or open shell to run and test
+docker run --rm test.local.hubitat-events sh
+```
+
+### How to run and test with Docker (using pypi package)
+
+```
+docker build -f pypi.Dockerfile -t test.pypi.hubitat-events .
+
+# Run hubitat_events command
+docker run --rm test.pypi.hubitat-events
+
+# Or open shell to run and test
+docker run --rm test.pypi.hubitat-events sh
+```
+
 ### How to run and test with virtual environment
 
 Create a virtual environment.
@@ -24,7 +48,7 @@ python3.9 -m venv .venv
 
 Build and install from the local source tree.
 ```
-pip install -e .
+pip install .
 ```
 
 Run

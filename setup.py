@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="hubitat-events-dhan",
-    version="0.0.2",
+    version="0.0.5",
     author="D Han",
     author_email="emaildhan@gmail.com",
     description="Package for fetching hubitat events",
@@ -19,7 +19,9 @@ setup(
     ],
     setup_requires=["flake8"],
     entry_points={
-        "console_scripts": ["hubitat_events=main:main"],
+        "console_scripts": [
+            "hubitat_events=hubitat_events.cli.hubitat_events_main:main"
+        ],
     }
     # [flake8]
     # max-line-length = 88
