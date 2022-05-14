@@ -22,7 +22,7 @@ docker build -f local.Dockerfile -t test.local.hubitat-events .
 docker run --rm test.local.hubitat-events
 
 # Or open shell to run and test
-docker run --rm test.local.hubitat-events sh
+docker run -it --rm test.local.hubitat-events sh
 ```
 
 ### How to run and test with Docker (using pypi package)
@@ -34,7 +34,7 @@ docker build -f pypi.Dockerfile -t test.pypi.hubitat-events .
 docker run --rm test.pypi.hubitat-events
 
 # Or open shell to run and test
-docker run --rm test.pypi.hubitat-events sh
+docker run -it --rm test.pypi.hubitat-events sh
 ```
 
 ### How to run and test with virtual environment

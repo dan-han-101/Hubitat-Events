@@ -8,6 +8,7 @@ from hubitat_events.adapters.event_to_file_adapter import EventWriter
 
 def get_all_devices():
     url = f"{get_hubitat_devices_url()}?access_token={get_hubitat_token()}"
+    print(f"get_all_devices from {url}")
     r = requests.get(url)
     if r.status_code == 200:
         print("get_all_devices succeeded")

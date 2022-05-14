@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  app:
+    build:
+      dockerfile: local.Dockerfile
+    environment:
+      - HUBITAT_TOKEN=${HUBITAT_TOKEN}
+      - HUBITAT_DEVICES_URL=${HUBITAT_DEVICES_URL}
+    volumes:
+      - .:/app
