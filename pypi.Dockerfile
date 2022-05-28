@@ -1,5 +1,7 @@
 FROM python:3.9-slim-buster
 
+RUN mkdir -p output/
+
 RUN python3.9 -m pip install --no-cache-dir \
     --index-url https://test.pypi.org/simple/ \
     hubitat-events-dhan

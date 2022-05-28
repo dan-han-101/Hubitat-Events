@@ -2,7 +2,7 @@ from datetime import datetime
 
 
 class DeviceWriter:
-    def __init__(self, filename: str = "./devices.txt"):
+    def __init__(self, filename: str = "./output/devices.txt"):
         self.filename = filename
 
     def save_device(
@@ -15,7 +15,7 @@ class DeviceWriter:
 
 
 class EventWriter:
-    def __init__(self, filename: str = "./output.txt"):
+    def __init__(self, filename: str = "./output/events.txt"):
         self.filename = filename
 
     def save_event(self, device_id: int, event_date: datetime, event_value: float):

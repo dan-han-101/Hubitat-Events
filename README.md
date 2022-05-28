@@ -13,6 +13,17 @@ Package for fetching events from your Hubitat.
 
 ## How To
 
+### How to run and test with docker compose (using local source files)
+
+- Update .env file with your hubitat token and URL
+- Build  
+  `docker compose build`
+- Run
+  `docker compose up`
+
+This will fetch recent hubitat data and save it to output/events.txt and output/devices.txt. 
+
+  
 ### How to run and test with Docker (using local source files)
 
 ```
