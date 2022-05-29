@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . /app
 
-RUN mkdir -p output/
+RUN mkdir -p output/db
 
 RUN python3.9 -m pip install .
 

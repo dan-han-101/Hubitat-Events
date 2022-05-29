@@ -9,7 +9,7 @@ setup(
     long_description="file: README.md",
     long_description_content_type="text/markdown",
     python_requires=">=3.6",
-    install_requires=["requests"],
+    install_requires=["psycopg2-binary", "requests", "sqlalchemy"],
     package_dir={"hubitat_events": "hubitat_events"},
     url="https://github.com/programmerdays/Hubitat-Events",
     classifiers=[

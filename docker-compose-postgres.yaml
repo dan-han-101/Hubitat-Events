@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=hubitat_events_user
+      - POSTGRES_PASSWORD=hubitat_events_password
+      - POSTGRES_DB=hubitat_events_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      - ./output/pg_data:/var/lib/postgresql/data
+  app:
+    build:
+      dockerfile: local.Dockerfile
+    environment:
+      - HUBITAT_TOKEN=${HUBITAT_TOKEN}
+      - HUBITAT_DEVICES_URL=${HUBITAT_DEVICES_URL}
+    volumes:
+      - .:/app
+
+volumes:
+  db:
+    driver: local

@@ -2,8 +2,12 @@
 
 import requests
 from hubitat_events.util.constants import get_hubitat_devices_url, get_hubitat_token
-from hubitat_events.adapters.event_to_file_adapter import DeviceWriter
-from hubitat_events.adapters.event_to_file_adapter import EventWriter
+
+# from hubitat_events.adapters.event_to_file_adapter import DeviceWriter
+# from hubitat_events.adapters.event_to_file_adapter import EventWriter
+
+from hubitat_events.adapters.event_to_db_adapter import DeviceWriter
+from hubitat_events.adapters.event_to_db_adapter import EventWriter
 
 
 def get_all_devices():
