@@ -20,6 +20,13 @@ services:
       - HUBITAT_DEVICES_URL=${HUBITAT_DEVICES_URL}
     volumes:
       - .:/app
+  grafana:
+    image: grafana/grafana-oss
+    restart: always
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./grafana:/var/lib/grafana
 
 volumes:
   db:
