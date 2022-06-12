@@ -1,7 +1,10 @@
 # Hubitat-Events
 Package for fetching events from your Hubitat.
 
-[Hubitat](https://hubitat.com/) is a home automation hub. This repository helps you retrieve events from the hub.
+[Hubitat](https://hubitat.com/) is a home automation hub. This repository helps you retrieve events from the hub. There is some out of the box integrations with:
+
+- postgresql database to persist data
+- grafana dashboards to view data
 
 ## Requirements
 
@@ -10,6 +13,7 @@ Package for fetching events from your Hubitat.
 3. After you set up the Maker API, you should have:
    1. url for your devices
    2. token to connect
+4. Docker as the application runner
 
 ## How To
 

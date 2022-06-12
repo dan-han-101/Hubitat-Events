@@ -1,0 +1,24 @@
+# config file version
+apiVersion: 1
+
+datasources:
+  - name: PostgreSQL
+    type: postgres
+    access: proxy
+    orgId: 1
+    url: host.docker.internal:5432
+    uid: ILWH0r97z
+    user: readonly_user
+    password: readonly_password
+    typeName: PostgreSQL
+    database: hubitat_events_db
+    basicAuth: false
+    isDefault: true
+    jsonData:
+      postgresVersion: 1200
+      sslmode: disable
+      tlsAuth: false
+      tlsAuthWithCACert: false
+      tlsConfigurationMethod: file-path
+      tlsSkipVerify: true
+    editable: true
