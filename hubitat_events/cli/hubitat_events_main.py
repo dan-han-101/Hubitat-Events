@@ -3,11 +3,13 @@
 import requests
 from hubitat_events.util.constants import get_hubitat_devices_url, get_hubitat_token
 
-# from hubitat_events.adapters.event_to_file_adapter import DeviceWriter
-# from hubitat_events.adapters.event_to_file_adapter import EventWriter
+from hubitat_events.adapters.event_to_file_adapter import (
+    DeviceWriter as FileDeviceWriter,
+)
+from hubitat_events.adapters.event_to_file_adapter import EventWriter as FileEventWriter
 
-from hubitat_events.adapters.event_to_db_adapter import DeviceWriter
-from hubitat_events.adapters.event_to_db_adapter import EventWriter
+from hubitat_events.adapters.event_to_db_adapter import DeviceWriter as DbDeviceWriter
+from hubitat_events.adapters.event_to_db_adapter import EventWriter as DbEventWriter
 
 
 def get_all_devices():
@@ -38,12 +40,19 @@ def get_events_for_id(device_id: int):
 
 
 def main():
-    device_writer = DeviceWriter()
-    event_writer = EventWriter()
+    # Write information to a database. This is useful for peristent long term
+    # storage.
+    db_device_writer = DbDeviceWriter()
+    db_event_writer = DbEventWriter()
+
+    # Write information to a file. This is useful for quick debugging.
+    file_device_writer = FileDeviceWriter()
+    file_event_writer = FileEventWriter()
 
     devices = get_all_devices()
     for d in devices:
-        device_writer.save_device(d["id"], d["type"], d["name"], d["label"])
+        file_device_writer.save_device(d["id"], d["type"], d["name"], d["label"])
+        db_device_writer.save_device(d["id"], d["type"], d["name"], d["label"])
         print(
             f"Device id={d['id']},"
             + f" type={d['type']},"
@@ -52,7 +61,8 @@ def main():
         )
         events = get_events_for_id(d["id"])
         for e in events:
-            event_writer.save_event(d["id"], e["date"], e["value"])
+            file_event_writer.save_event(d["id"], e["date"], e["value"])
+            db_event_writer.save_event(d["id"], e["date"], e["value"])
 
 
 if __name__ == "__main__":
