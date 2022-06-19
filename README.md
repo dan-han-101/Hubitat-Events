@@ -1,9 +1,12 @@
 # Hubitat-Events
 Package for fetching events from your Hubitat.
 
-[Hubitat](https://hubitat.com/) is a home automation hub. This repository helps you retrieve events from the hub. There is some out of the box integrations with:
+[Hubitat](https://hubitat.com/) is a home automation hub. This repository helps you retrieve events from the hub.
 
-- postgresql database to persist data
+The key features of this package include:
+
+- code to fetch data from your Hubitat connected devices
+- postgresql database to save data
 - grafana dashboards to view data
 
 ## Requirements
@@ -17,59 +20,14 @@ Package for fetching events from your Hubitat.
 
 ## How To
 
-### How to run and test with docker compose (using local source files)
+### How to fetch data
 
-- Update .env file with your hubitat token and URL
-- Build  
-  `docker compose build`
-- Run  
-  `docker compose up`
+Run the following command with the variables replaced with real values.
 
-This will fetch recent hubitat data and save it to output/events.txt and output/devices.txt.
-
-### How to run and test with Docker (using local source files)
-
-```
-docker build -f local.Dockerfile -t test.local.hubitat-events .
-
-# Run hubitat_events command
-docker run --rm test.local.hubitat-events
-
-# Or open shell to run and test
-docker run -it --rm test.local.hubitat-events sh
-```
-
-### How to run and test with Docker (using pypi package)
-
-```
-docker build -f pypi.Dockerfile -t test.pypi.hubitat-events .
-
-# Run hubitat_events command
-docker run --rm test.pypi.hubitat-events
-
-# Or open shell to run and test
-docker run -it --rm test.pypi.hubitat-events sh
-```
-
-### How to run and test with virtual environment
-
-Create a virtual environment.
-
-```
-python3.9 -m venv .venv
-. .venv/bin/activate
-```
-
-Build and install from the local source tree.
-```
-pip install .
-```
-
-Run
 ```
 HUBITAT_TOKEN=<your-token> \
   HUBITAT_DEVICES_URL=http://hubitat.local/apps/api/<your-device-id>/devices \
-  .venv/bin/hubitat_events
+  docker compose run data-refresh
 ```
 
 where you'd replace your token and device id with something like:
@@ -80,11 +38,23 @@ HUBITAT_TOKEN=abcde-911-zyx \
   .venv/bin/hubitat_events
 ```
 
-When you are done, close and clean up virtual environment.
+If it worked, it will create:
+- output/devices.txt - a list of hubitat devices
+- output/events.txt - a dump of hubitat event information
+- output/postgresql - postgres database data 
+
+### How to view data in grafana
+After you fetch data from your hubitat, you can view the saved data in grafana. Run
+
 ```
-deactivate
-rm -rf .venv
+docker compose up grafana
 ```
+
+After the container starts to run, go to [http://localhost:3000](http://localhost:3000). You should see the grafana login screen. You should be able to login with a user name of `admin` and a password of `admin`.
+
+Go to [http://localhost:3000/datasources](http://localhost:3000/datasources). There should be one data source named "PostgreSql". Go into this data source and click on "Save & test" to confirm that everything is working.
+
+Go to [http://localhost:3000/dashboards](http://localhost:3000/dashboards). There should be one dashboard named "All Hubitat Devices and Events Dashboard". This dashboard has data from all your hubitat devices. You should create new dashboards to create custom views of your data.
 
 ### How to publish to python package index
 

@@ -1,6 +1,39 @@
 version: "3.9"
 services:
-  app:
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=hubitat_events_user
+      - POSTGRES_PASSWORD=hubitat_events_password
+      - POSTGRES_DB=hubitat_events_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      - ./output/postgresql/data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -d hubitat_events_db -U hubitat_events_user &&  psql -d hubitat_events_db -U hubitat_events_user -f /docker-entrypoint-initdb.d/create_tables.sql"
+        ]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+  grafana:
+    image: grafana/grafana-oss
+    restart: always
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+      - ./output/grafana:/var/lib/grafana
+    depends_on:
+      db:
+        condition: service_healthy
+  data-refresh:
     build:
       dockerfile: local.Dockerfile
     environment:
@@ -8,3 +41,12 @@ services:
       - HUBITAT_DEVICES_URL=${HUBITAT_DEVICES_URL}
     volumes:
       - .:/app
+    depends_on:
+      db:
+        condition: service_healthy
+    command:
+      - /usr/local/bin/hubitat_events
+
+volumes:
+  db:
+    driver: local
