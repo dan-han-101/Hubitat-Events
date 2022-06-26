@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . /app
 
-RUN mkdir -p output/db
+RUN mkdir -p output/postgresql/data output/grafana
 
 RUN python3.9 -m pip install .
 
